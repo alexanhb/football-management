@@ -6,6 +6,7 @@ import com.alexanhb.footballmanagement.services.PlayerService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -38,7 +39,7 @@ public class PlayerMapService extends AbstractMapService<Player, Long> implement
     }
 
     @Override
-    public Set<Player> findAllByLastNameLike(String lastName) {
+    public List<Player> findAllByLastNameLike(String lastName) {
         return null;
     }
 

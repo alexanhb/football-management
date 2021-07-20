@@ -5,6 +5,7 @@ import com.alexanhb.footballmanagement.services.ClubService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -18,6 +19,20 @@ public class ClubMapService extends AbstractMapService<Club, Long> implements Cl
     @Override
     public Club findById(Long id) {
         return super.findById(id);
+    }
+
+    @Override
+    public Club findByClubName(String clubName) {
+        return this.findAll()
+                .stream()
+                .filter(club -> club.getClubName().equalsIgnoreCase(clubName))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public List<Club> findAllByClubNameLike(String clubName) {
+        return null;
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -25,7 +26,7 @@ public class PlayerSDJpaService implements PlayerService {
     }
 
     @Override
-    public Set<Player> findAllByLastNameLike(String lastName) {
+    public List<Player> findAllByLastNameLike(String lastName) {
         return playerRepository.findAllByLastNameLike(lastName);
     }
 

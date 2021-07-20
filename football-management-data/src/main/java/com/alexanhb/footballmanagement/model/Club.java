@@ -1,79 +1,42 @@
 package com.alexanhb.footballmanagement.model;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "clubs")
 public class Club extends BaseEntity{
 
+    @Builder
+    public Club(Long id, String clubName, Stadium stadium, Manager manager, Set<Player> squad) {
+        super(id);
+        this.clubName = clubName;
+        this.stadium = stadium;
+        this.manager = manager;
+        this.squad = squad;
+    }
+
+    //OWNER
+
     @Column(name = "club_name")
     private String clubName;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Stadium stadium;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Manager manager;
 
     @ManyToOne
     @JoinColumn(name = "league_id")
     private League league;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "player_id")
+    @OneToMany(mappedBy = "club")
     private Set<Player> squad = new HashSet<>();
-
-    public Club(String clubName, Stadium stadium, Manager manager, Set<Player> squad) {
-        this.clubName = clubName;
-        this.stadium = stadium;
-        this.manager = manager;
-        this.squad = squad;
-    }
-
-    public String getClubName() {
-        return clubName;
-    }
-
-    public void setClubName(String clubName) {
-        this.clubName = clubName;
-    }
-
-    public Stadium getStadium() {
-        return stadium;
-    }
-
-    public void setStadium(Stadium stadium) {
-        this.stadium = stadium;
-    }
-
-    public Manager getManager() {
-        return manager;
-    }
-
-    public void setManager(Manager manager) {
-        this.manager = manager;
-    }
-
-    public League getLeague() {
-        return league;
-    }
-
-    public void setLeague(League league) {
-        this.league = league;
-    }
-
-    public Set<Player> getSquad() {
-        return squad;
-    }
-
-    public void setSquad(Set<Player> squad) {
-        this.squad = squad;
-    }
 }

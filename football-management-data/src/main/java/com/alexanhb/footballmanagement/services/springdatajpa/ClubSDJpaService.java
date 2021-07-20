@@ -1,12 +1,14 @@
 package com.alexanhb.footballmanagement.services.springdatajpa;
 
 import com.alexanhb.footballmanagement.model.Club;
+import com.alexanhb.footballmanagement.model.Player;
 import com.alexanhb.footballmanagement.repositories.ClubRepository;
 import com.alexanhb.footballmanagement.services.ClubService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -30,6 +32,17 @@ public class ClubSDJpaService implements ClubService {
     public Club findById(Long aLong) {
         return clubRepository.findById(aLong).orElse(null);
     }
+
+    @Override
+    public Club findByClubName(String clubName) {
+        return clubRepository.findByClubName(clubName);
+    }
+
+    @Override
+    public List<Club> findAllByClubNameLike(String clubName) {
+        return clubRepository.findAllByClubNameLike(clubName);
+    }
+
 
     @Override
     public Club save(Club object) {

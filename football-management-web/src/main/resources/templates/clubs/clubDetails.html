@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h2>Club Information</h2>
+
+
+<table th:object="${club}">
+  <tr>
+    <th>Club name</th>
+    <td th:text="*{clubName}"></td>
+  </tr>
+  <tr>
+    <th>Manager</th>
+    <td th:text="*{manager.firstName + ' ' + manager.lastName}"></td>
+  </tr>
+  <tr>
+    <th>Stadium</th>
+    <td th:text="*{stadium.stadiumName}"></td>
+  </tr>
+</table>
+
+<table>
+  <th>Players</th>
+    <tr th:each="player : ${club.squad}">
+      <td>
+        <dl>
+          <dd th:text="${player.firstName + ' ' + player.lastName}"></dd>
+        </dl>
+      </td>
+    </tr>
+</table>
+</body>
+</html>

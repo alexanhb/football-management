@@ -1,16 +1,30 @@
 package com.alexanhb.footballmanagement.model;
 
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "stadiums")
 public class Stadium extends BaseEntity{
+
+    //VISIT
+
+    @Builder
+    public Stadium(Long id, String stadiumName, int capacity, String location, String fieldSize, Club club) {
+        super(id);
+        this.stadiumName = stadiumName;
+        this.capacity = capacity;
+        this.location = location;
+        this.fieldSize = fieldSize;
+        this.club = club;
+    }
 
     @Column(name = "stadium_name")
     private String stadiumName;
@@ -24,53 +38,8 @@ public class Stadium extends BaseEntity{
     @Column(name = "stadium_fieldsize")
     private String fieldSize;
 
-    public Stadium(String stadiumName, int capacity, String location, String fieldSize) {
-        this.stadiumName = stadiumName;
-        this.capacity = capacity;
-        this.location = location;
-        this.fieldSize = fieldSize;
-    }
-
     @OneToOne
+    @JoinColumn(name = "club_id")
     private Club club;
 
-    public String getStadiumName() {
-        return stadiumName;
-    }
-
-    public void setStadiumName(String stadiumName) {
-        this.stadiumName = stadiumName;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getFieldSize() {
-        return fieldSize;
-    }
-
-    public void setFieldSize(String fieldSize) {
-        this.fieldSize = fieldSize;
-    }
-
-    public Club getClub() {
-        return club;
-    }
-
-    public void setClub(Club club) {
-        this.club = club;
-    }
 }
