@@ -62,7 +62,7 @@ public class ClubController {
     }
 
     @GetMapping("/{clubName}")
-    public ModelAndView showOwner(@PathVariable String clubName) {
+    public ModelAndView showClub(@PathVariable String clubName) {
         ModelAndView mav = new ModelAndView("clubs/clubDetails");
         mav.addObject(clubService.findByClubName(clubName));
         return mav;

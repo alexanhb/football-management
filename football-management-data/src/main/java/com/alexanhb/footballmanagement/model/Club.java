@@ -22,8 +22,6 @@ public class Club extends BaseEntity{
         this.squad = squad;
     }
 
-    //OWNER
-
     @Column(name = "club_name")
     private String clubName;
 
@@ -31,12 +29,16 @@ public class Club extends BaseEntity{
     private Stadium stadium;
 
     @OneToOne
+    @JoinColumn(name = "manager_id")
     private Manager manager;
-
-    @ManyToOne
-    @JoinColumn(name = "league_id")
-    private League league;
 
     @OneToMany(mappedBy = "club")
     private Set<Player> squad = new HashSet<>();
+
+    private String clubLogo;
+
+    @Override
+    public String toString() {
+        return clubName + " " + stadium + " " + manager + " " + " " + squad;
+    }
 }

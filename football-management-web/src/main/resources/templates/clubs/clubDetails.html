@@ -2,6 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link th:href="@{/premierLeagueStyle.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/premierLeagueJS.js}"></script>
 </head>
 <body>
 
@@ -21,17 +23,11 @@
     <th>Stadium</th>
     <td th:text="*{stadium.stadiumName}"></td>
   </tr>
-</table>
-
-<table>
   <th>Players</th>
-    <tr th:each="player : ${club.squad}">
-      <td>
-        <dl>
-          <dd th:text="${player.firstName + ' ' + player.lastName}"></dd>
-        </dl>
-      </td>
-    </tr>
+  <tr th:each="player : ${club.squad}">
+    <td th:text="${player.firstName + ' ' + player.lastName}"></td>
+  </tr>
+
 </table>
 </body>
 </html>

@@ -12,9 +12,6 @@ import java.time.LocalDate;
 @Table(name = "players")
 public class Player extends Person{
 
-    //PET
-
-
     public Player(Long id, String firstName, String lastName, LocalDate birthDate, String position, Club club, int shirtNumber) {
         super(id, firstName, lastName, birthDate);
         this.position = position;
@@ -31,4 +28,10 @@ public class Player extends Person{
 
     @Column(name = "shirtnumber")
     private int shirtNumber;
+
+
+    @Override
+    public String toString() {
+        return getFirstName() + " " + getLastName();
+    }
 }

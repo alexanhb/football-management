@@ -14,14 +14,12 @@ import java.util.Set;
 public class Dataloader implements CommandLineRunner {
 
     private final ClubService clubService;
-    private final LeagueService leagueService;
     private final ManagerService managerService;
     private final PlayerService playerService;
     private final StadiumService stadiumService;
 
-    public Dataloader(ClubService clubService, LeagueService leagueService, ManagerService managerService, PlayerService playerService, StadiumService stadiumService) {
+    public Dataloader(ClubService clubService, ManagerService managerService, PlayerService playerService, StadiumService stadiumService) {
         this.clubService = clubService;
-        this.leagueService = leagueService;
         this.managerService = managerService;
         this.playerService = playerService;
         this.stadiumService = stadiumService;
@@ -43,9 +41,9 @@ public class Dataloader implements CommandLineRunner {
         managerService.save(ogs);
 
         Manager klopp = new Manager();
-        ogs.setFirstName("Jurgen");
-        ogs.setLastName("Klopp");
-        ogs.setBirthDate(LocalDate.of(1967, 06,16));
+        klopp.setFirstName("Jurgen");
+        klopp.setLastName("Klopp");
+        klopp.setBirthDate(LocalDate.of(1967, 06,16));
         managerService.save(klopp);
 
         System.out.println("Managers loading...");
@@ -76,6 +74,7 @@ public class Dataloader implements CommandLineRunner {
         manchesterUnited.setClubName("Manchester United");
         manchesterUnited.setStadium(oldTrafford);
         manchesterUnited.setManager(ogs);
+        manchesterUnited.setClubLogo("https://assets.manutd.com/AssetPicker/images/0/0/3/2/197240/Header-Logo1500994616801.png");
         clubService.save(manchesterUnited);
 
 
@@ -84,6 +83,7 @@ public class Dataloader implements CommandLineRunner {
         liverpool.setClubName("Liverpool");
         liverpool.setStadium(anfield);
         liverpool.setManager(klopp);
+        liverpool.setClubLogo("https://d3j2s6hdd6a7rg.cloudfront.net/v2/JE-657/lfc/images/logo.png");
         clubService.save(liverpool);
 
 
@@ -93,18 +93,6 @@ public class Dataloader implements CommandLineRunner {
         Set<Club> premierLeagueClubs = new HashSet<>();
         premierLeagueClubs.add(manchesterUnited);
         premierLeagueClubs.add(liverpool);
-
-        //Leagues
-        League premierLeague = new League();
-        premierLeague.setLeagueName("Premier League");
-        premierLeague.setCountry("England");
-        premierLeague.setClubs(premierLeagueClubs);
-        premierLeague.setNumberOfTeams(20);
-        premierLeague.setWebsiteUrl("https://www.premierleague.com/");
-        leagueService.save(premierLeague);
-
-        System.out.println("Leagues loading...");
-
 
         //|----------------------------------------------------------------------|
 

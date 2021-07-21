@@ -2,31 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link th:href="@{/premierLeagueStyle.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/premierLeagueJS.js}"></script>
 </head>
 <body>
 
 <h2>Clubs</h2>
 
 <table>
-    <thead>
-      <tr>
-        <th>Club Name</th>
-        <th>Manager</th>
-        <th>Stadium</th>
-        <th>League</th>
-      </tr>
-    </thead>
     <tbody>
       <tr th:each="club : ${selections}">
         <td>
-          <a th:href="@{/clubs/__${club.id}__}" th:text="${club.clubName}"></a>
+          <img class="clubLogo" th:src="${club.clubLogo}"/>
+          <button type="button" class="clubCollapsiblebtn" th:text="${club.clubName}"></button>
+          <div class="clubContent">
+              <p>HALLO</p>
+              <p th:text="${club.manager}"></p>
+              <p th:text="${club.stadium}"></p>
+          </div>
         </td>
+        <!--<a th:href="@{/clubs/__${club.clubName}__}" th:text="${club.clubName}"></a>
         <td th:text="${club.manager}"></td>
-        <td th:text="${club.stadium}"></td>
-        <td th:text="${club.league}"></td>
+        <td th:text="${club.stadium}"></td> -->
       </tr>
     </tbody>
 </table>
-
 </body>
 </html>
