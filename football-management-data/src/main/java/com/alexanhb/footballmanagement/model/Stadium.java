@@ -42,6 +42,8 @@ public class Stadium extends BaseEntity{
     @JoinColumn(name = "club_id")
     private Club club;
 
+    private String stadiumImage;
+
     @Override
     public String toString() {
         return stadiumName;

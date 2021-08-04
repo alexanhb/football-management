@@ -7,25 +7,45 @@
 </head>
 <body>
 
-<h2>Clubs</h2>
+<header class="masterHeader">
+    <nav class="clubLogoNavigation"></nav>
+    <div class="fixedContainer">
+        <div class="navContainer">
+            <nav class="mainNav">
+                <a class="pageLinks" href="/index.html">Home</a>
+                <a class="pageLinks" href="/clubs?clubName=">Clubs</a>
+            </nav>
+        </div>
+    </div>
+</header>
 
-<table>
-    <tbody>
-      <tr th:each="club : ${selections}">
-        <td>
-          <img class="clubLogo" th:src="${club.clubLogo}"/>
-          <button type="button" class="clubCollapsiblebtn" th:text="${club.clubName}"></button>
-          <div class="clubContent">
-              <p>HALLO</p>
-              <p th:text="${club.manager}"></p>
-              <p th:text="${club.stadium}"></p>
-          </div>
-        </td>
-        <!--<a th:href="@{/clubs/__${club.clubName}__}" th:text="${club.clubName}"></a>
-        <td th:text="${club.manager}"></td>
-        <td th:text="${club.stadium}"></td> -->
-      </tr>
-    </tbody>
-</table>
+<div class="mainContent">
+    <header class="clubsHeader">
+        <div class="column pageClubDiv">
+            <h1 class="pageClubTitle">Clubs</h1>
+        </div>
+    </header>
+        <div class="column">
+            <ul class="clubBannerList">
+                <li class="clubList" th:each="club : ${selections}">
+                    <a class="linkClubBox" th:href="@{/clubs/__${club.clubName}__}">
+                        <div>
+                            <img class="stadiumImage" th:src="${club.stadium.stadiumImage}"/>
+                        </div>
+                        <div class="indexClubBadge">
+                            <img class="clubLogo" th:src="${club.clubLogo}"/>
+                        </div>
+                        <div class="indexClubInfo" th:style="'background-color:' + ${club.clubColor}">
+                            <div class="nameContainer" th:style="'border: 1px solid' + ${club.clubColor}">
+                                <h3 class="clubName" th:text="${club.clubName}"></h3>
+                                <div class="stadiumName" th:text="${club.stadium}"></div>
+                            </div>
+                            <h3 class="clubProfile">Club Profile &rarr;</h3>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+</div>
 </body>
 </html>

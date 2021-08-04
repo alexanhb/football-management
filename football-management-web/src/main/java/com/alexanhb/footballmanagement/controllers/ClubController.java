@@ -43,6 +43,7 @@ public class ClubController {
         }
 
         List<Club> searchResult = clubService.findAllByClubNameLike("%" + club.getClubName() + "%");
+        searchResult.sort(((o1, o2) -> o1.getClubName().compareTo(o2.getClubName())));
 
         if(searchResult.isEmpty()){
             //No clubs found

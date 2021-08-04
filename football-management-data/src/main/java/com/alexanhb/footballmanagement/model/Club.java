@@ -11,12 +11,13 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "clubs")
-public class Club extends BaseEntity{
+public class Club extends BaseEntity implements Comparable<Club>{
 
     @Builder
-    public Club(Long id, String clubName, Stadium stadium, Manager manager, Set<Player> squad) {
+    public Club(Long id, String clubName, String clubColor, Stadium stadium, Manager manager, Set<Player> squad) {
         super(id);
         this.clubName = clubName;
+        this.clubColor = clubColor;
         this.stadium = stadium;
         this.manager = manager;
         this.squad = squad;
@@ -37,8 +38,15 @@ public class Club extends BaseEntity{
 
     private String clubLogo;
 
+    private String clubColor;
+
     @Override
     public String toString() {
         return clubName + " " + stadium + " " + manager + " " + " " + squad;
+    }
+
+    @Override
+    public int compareTo(Club o) {
+        return this.clubName.compareTo(o.getClubName());
     }
 }

@@ -2,10 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link th:href="@{/premierLeagueStyle.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/premierLeagueJS.js}"></script>
 </head>
 <body>
-  <h2>Welcome to football management</h2>
+<header class="masterHeader">
+    <nav class="clubLogoNavigation"></nav>
+    <div class="fixedContainer">
+        <div class="navContainer">
+            <nav class="mainNav">
+                <a class="pageLinks" href="/index.html">Home</a>
+                <a class="pageLinks" href="/clubs?clubName=">Clubs</a>
+            </nav>
+        </div>
+    </div>
+</header>
 
 </body>
 </html>
