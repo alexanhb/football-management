@@ -4,6 +4,7 @@ import com.alexanhb.footballmanagement.model.Club;
 import com.alexanhb.footballmanagement.model.Player;
 import com.alexanhb.footballmanagement.repositories.ClubRepository;
 import com.alexanhb.footballmanagement.services.ClubService;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,8 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-@Profile("springdatajpa")
+@Profile({"default", "springdatajpa"})
+@Primary
 public class ClubSDJpaService implements ClubService {
 
     private final ClubRepository clubRepository;

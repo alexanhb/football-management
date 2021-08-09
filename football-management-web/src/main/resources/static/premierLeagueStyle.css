@@ -110,7 +110,7 @@ ol li, ul li{
 
 .pageClubTitle{
     margin-top: 0;
-    margin-left: 6rem;
+    margin-left: 4rem;
     font-size: 5rem;
 }
 
@@ -197,4 +197,9 @@ ol li, ul li{
     font-size: 15px;
     margin-left: 5px;
     padding-bottom: 15px;
+}
+
+/* Manger List */
+.managerList .managerLink{
+    color: black;
 }

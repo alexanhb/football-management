@@ -27,7 +27,7 @@
     </header>
         <div class="column">
             <ul class="clubBannerList">
-                <li class="clubList" th:each="club : ${selections}">
+                <li class="clubList" th:each="club : ${clubs}">
                     <a class="linkClubBox" th:href="@{/clubs/__${club.clubName}__}">
                         <div>
                             <img class="stadiumImage" th:src="${club.stadium.stadiumImage}"/>

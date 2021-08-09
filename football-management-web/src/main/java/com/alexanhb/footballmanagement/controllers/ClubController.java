@@ -6,17 +6,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RequestMapping("/clubs")
 @Controller
 public class ClubController {
+
+    private static final String VIEWS_CLUB_CREATE_OR_UPDATE_FORM = "clubs/createOrUpdateClubForm";
 
     private final ClubService clubService;
 
@@ -29,37 +31,14 @@ public class ClubController {
         dataBinder.setDisallowedFields("id");
     }
 
-    @RequestMapping("/find")
-    public String findClubs(Model model){
-        model.addAttribute("club", Club.builder().build());
-        return "clubs/findClubs";
-    }
+    @RequestMapping("/")
+    public String findAllClubs(Model model){
+        Set<Club> setAllClubs = clubService.findAll();
+        List<Club> allClubs = new ArrayList<>(setAllClubs);
+        model.addAttribute("clubs", allClubs);
 
-    @GetMapping
-    public String processFindForm(Club club, BindingResult result, Model model){
-        //Allow parameterless GET requests for /clubs to return all records
-        if(club.getClubName() == null){
-            club.setClubName(""); //Empty String signifies broadest possible search
-        }
-
-        List<Club> searchResult = clubService.findAllByClubNameLike("%" + club.getClubName() + "%");
-        searchResult.sort(((o1, o2) -> o1.getClubName().compareTo(o2.getClubName())));
-
-        if(searchResult.isEmpty()){
-            //No clubs found
-            result.rejectValue("clubName", "notFound", "not found");
-            return "clubs/findClubs";
-        }
-        else if(searchResult.size() == 1){
-            //1 club found
-            club = searchResult.get(0);
-            return "redirect:/clubs/" + club.getClubName();
-        }
-        else{
-            //Multiple clubs found
-            model.addAttribute("selections", searchResult);
-            return "clubs/clubsList";
-        }
+        allClubs.sort(((o1, o2) -> o1.getClubName().compareTo(o2.getClubName())));
+        return "clubs/clubsList";
     }
 
     @GetMapping("/{clubName}")
@@ -67,6 +46,18 @@ public class ClubController {
         ModelAndView mav = new ModelAndView("clubs/clubDetails");
         mav.addObject(clubService.findByClubName(clubName));
         return mav;
+    }
+
+    @GetMapping("/new")
+    public String initCreationForm(Model model){
+        model.addAttribute("club", Club.builder().build());
+        return VIEWS_CLUB_CREATE_OR_UPDATE_FORM;
+    }
+
+    @PostMapping("/new")
+    public String processCreationForm(@Valid Club club, BindingResult result){
+            Club savedClub = clubService.save(club);
+            return "redirect:/clubs/" + savedClub.getClubName();
     }
 
 

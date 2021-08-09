@@ -3,6 +3,7 @@ package com.alexanhb.footballmanagement.services.springdatajpa;
 import com.alexanhb.footballmanagement.model.Player;
 import com.alexanhb.footballmanagement.repositories.PlayerRepository;
 import com.alexanhb.footballmanagement.services.PlayerService;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,8 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-@Profile("springdatajpa")
+@Profile({"default", "springdatajpa"})
+@Primary
 public class PlayerSDJpaService implements PlayerService {
 
     private final PlayerRepository playerRepository;

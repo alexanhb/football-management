@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link th:href="@{/premierLeagueStyle.css}" rel="stylesheet" />
+  <script type="text/javascript" th:src="@{/premierLeagueJS.js}"></script>
+</head>
+<body>
+
+<header class="masterHeader">
+  <nav class="clubLogoNavigation"></nav>
+  <div class="fixedContainer">
+    <div class="navContainer">
+      <nav class="mainNav">
+        <a class="pageLinks" href="/index.html">Home</a>
+        <a class="pageLinks" href="/clubs?clubName=">Clubs</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="mainContent">
+  <header class="clubsHeader">
+    <div class="column pageClubDiv">
+      <h1 class="pageClubTitle">Managers</h1>
+    </div>
+  </header>
+  <div class="column">
+    <ul>
+      <li class="managerList" th:each="manager : ${managers}">
+        <a class="managerLink" th:href="@{/managers/__${manager.id}__}">
+          <div>
+            <h3 th:text="${manager.firstName + ' ' + manager.lastName}"></h3>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
