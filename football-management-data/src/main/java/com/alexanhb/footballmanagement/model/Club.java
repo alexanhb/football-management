@@ -14,12 +14,11 @@ import java.util.Set;
 public class Club extends BaseEntity implements Comparable<Club>{
 
     @Builder
-    public Club(Long id, String clubName, String clubColor, Stadium stadium, Manager manager, Set<Player> squad) {
+    public Club(Long id, String clubName, String clubColor, Set<Player> squad) {
         super(id);
         this.clubName = clubName;
         this.clubColor = clubColor;
-        this.stadium = stadium;
-        this.manager = manager;
+
         this.squad = squad;
     }
 
@@ -36,9 +35,47 @@ public class Club extends BaseEntity implements Comparable<Club>{
     @OneToMany(mappedBy = "club")
     private Set<Player> squad = new HashSet<>();
 
+    @Column(nullable = false)
     private String clubLogo;
 
+    @Column(nullable = false)
     private String clubColor;
+
+
+    public Manager getManager(String name) {
+        return getManager(name, false);
+    }
+
+    public Manager getManager(String name, boolean ignoreNew) {
+        name = name.toLowerCase();
+            if (!ignoreNew || !manager.isNew()) {
+                String compName = manager.getFirstName() + manager.getLastName();
+                compName = compName.toLowerCase();
+                if (compName.equals(name)) {
+                    return manager;
+                }
+            }
+        return null;
+    }
+
+
+    public Stadium getStadium(String name) {
+        return getStadium(name, false);
+    }
+
+    public Stadium getStadium(String name, boolean ignoreNew) {
+        name = name.toLowerCase();
+            if (!ignoreNew || !stadium.isNew()) {
+                String compName = stadium.getStadiumName();
+                compName = compName.toLowerCase();
+                if (compName.equals(name)) {
+                    return stadium;
+                }
+            }
+        return null;
+    }
+
+
 
     @Override
     public String toString() {

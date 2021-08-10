@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Table(name = "players")
 public class Player extends Person{
 
-    public Player(Long id, String firstName, String lastName, LocalDate birthDate, String position, Club club, int shirtNumber) {
+    public Player(Long id, String firstName, String lastName, String birthDate, String position, Club club, int shirtNumber) {
         super(id, firstName, lastName, birthDate);
         this.position = position;
         this.club = club;

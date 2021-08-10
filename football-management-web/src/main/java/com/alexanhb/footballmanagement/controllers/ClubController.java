@@ -31,7 +31,7 @@ public class ClubController {
         dataBinder.setDisallowedFields("id");
     }
 
-    @RequestMapping("/")
+    @RequestMapping({"", "/"})
     public String findAllClubs(Model model){
         Set<Club> setAllClubs = clubService.findAll();
         List<Club> allClubs = new ArrayList<>(setAllClubs);
@@ -56,6 +56,19 @@ public class ClubController {
 
     @PostMapping("/new")
     public String processCreationForm(@Valid Club club, BindingResult result){
+            Club savedClub = clubService.save(club);
+            return "redirect:/clubs/" + savedClub.getClubName();
+    }
+
+    @GetMapping("/{clubName}/edit")
+    public String initUpdateClubForm(@PathVariable String clubName, Model model) {
+        model.addAttribute(clubService.findByClubName(clubName));
+        return VIEWS_CLUB_CREATE_OR_UPDATE_FORM;
+    }
+
+    @PostMapping("/{clubName}/edit")
+    public String processUpdateClubForm(@Valid Club club, BindingResult result, @PathVariable String clubName) {
+            club.setClubName(clubName);
             Club savedClub = clubService.save(club);
             return "redirect:/clubs/" + savedClub.getClubName();
     }

@@ -16,19 +16,19 @@ import java.time.LocalDate;
 @MappedSuperclass
 public class Person extends BaseEntity{
 
-    public Person(Long id, String firstName, String lastName, LocalDate birthDate) {
+    public Person(Long id, String firstName, String lastName, String birthDate) {
         super(id);
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
     }
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "birth_date")
-    private LocalDate birthDate;
+    @Column(name = "birth_date", nullable = false)
+    private String birthDate;
 }

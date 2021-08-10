@@ -12,7 +12,8 @@
         <div class="navContainer">
             <nav class="mainNav">
                 <a class="pageLinks" href="/index.html">Home</a>
-                <a class="pageLinks" href="/clubs?clubName=">Clubs</a>
+                <a class="pageLinks" href="/clubs/">Clubs</a>
+                <a class="pageLinks" href="/managers/">Managers</a>
             </nav>
         </div>
     </div>
@@ -39,64 +40,6 @@
             <label class="form-label">Club logo</label>
             <div>
                 <input type="text" th:field="*{clubLogo}" required minlength="2" maxlength="256" />
-            </div>
-        </div>
-
-        <!-- Manager info -->
-        <div class="form-row">
-            <label class="form-label">Manager first name</label>
-            <div>
-                <input type="text" th:field="*{manager.firstName}" required minlength="2" maxlength="32" />
-            </div>
-        </div>
-
-        <div class="form-row">
-            <label class="form-label">Manager last name</label>
-            <div>
-                <input type="text" th:field="*{manager.lastName}" required minlength="2" maxlength="32" />
-            </div>
-        </div>
-
-        <div class="form-row">
-            <label class="form-label">Birthdate</label>
-            <div>
-                <input type="date" th:field="*{manager.birthDate}"/>
-            </div>
-        </div>
-
-        <!-- Stadium info -->
-        <div class="form-row">
-            <label class="form-label">Stadium name</label>
-            <div>
-                <input type="text" th:field="*{stadium.stadiumName}" required minlength="2" maxlength="64" />
-            </div>
-        </div>
-
-        <div class="form-row">
-            <label class="form-label">Capacity</label>
-            <div>
-                <input type="number" th:field="*{stadium.capacity}" required minlength="2" maxlength="10" />
-            </div>
-        </div>
-
-        <div class="form-row">
-            <label class="form-label">Location</label>
-            <div>
-                <input type="text" th:field="*{stadium.location}" required minlength="2" maxlength="64" />
-            </div>
-        </div>
-
-        <div class="form-row">
-            <label class="form-label">Field size</label>
-            <div>
-                <input type="text" th:field="*{stadium.fieldSize}" required minlength="2" maxlength="64" />
-            </div>
-        </div>
-
-        <div class="form-row">
-            <label class="form-label">Stadium Image</label>
-            <div>
-                <input type="text" th:field="*{stadium.stadiumImage}" required minlength="2" maxlength="256" />
             </div>
         </div>
 

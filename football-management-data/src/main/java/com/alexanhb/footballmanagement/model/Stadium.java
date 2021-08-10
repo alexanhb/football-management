@@ -26,23 +26,27 @@ public class Stadium extends BaseEntity{
         this.club = club;
     }
 
-    @Column(name = "stadium_name")
+
+    @Column(name = "stadium_name", nullable = false)
     private String stadiumName;
 
-    @Column(name = "stadium_capacity")
+    @Column(name = "stadium_capacity", nullable = false)
     private int capacity;
 
-    @Column(name = "stadium_location")
+    @Column(name = "stadium_location", nullable = false)
     private String location;
 
-    @Column(name = "stadium_fieldsize")
+    @Column(name = "stadium_fieldsize", nullable = false)
     private String fieldSize;
 
     @OneToOne
     @JoinColumn(name = "club_id")
     private Club club;
 
+    @Column(nullable = false)
     private String stadiumImage;
+
+
 
     @Override
     public String toString() {

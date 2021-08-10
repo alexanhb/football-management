@@ -6,6 +6,18 @@
     <script type="text/javascript" th:src="@{/premierLeagueJS.js}"></script>
 </head>
 <body>
+<header class="masterHeader">
+  <nav class="clubLogoNavigation"></nav>
+  <div class="fixedContainer">
+    <div class="navContainer">
+      <nav class="mainNav">
+        <a class="pageLinks" href="/index.html">Home</a>
+        <a class="pageLinks" href="/clubs/">Clubs</a>
+        <a class="pageLinks" href="/managers/">Managers</a>
+      </nav>
+    </div>
+  </div>
+</header>
 
 <h2>Club Information</h2>
 
@@ -27,7 +39,7 @@
   <tr th:each="player : ${club.squad}">
     <td th:text="${player.firstName + ' ' + player.lastName}"></td>
   </tr>
-
 </table>
+
 </body>
 </html>

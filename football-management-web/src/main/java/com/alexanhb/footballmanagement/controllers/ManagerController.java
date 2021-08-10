@@ -1,17 +1,19 @@
 package com.alexanhb.footballmanagement.controllers;
 
+import com.alexanhb.footballmanagement.model.Club;
 import com.alexanhb.footballmanagement.model.Manager;
 import com.alexanhb.footballmanagement.services.ClubService;
 import com.alexanhb.footballmanagement.services.ManagerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -21,10 +23,14 @@ import java.util.Set;
 @Controller
 public class ManagerController {
 
-    private final ManagerService managerService;
+    private static final String VIEWS_MANAGER_CREATE_OR_UPDATE_FORM = "managers/createOrUpdateManagerForm";
 
-    public ManagerController(ManagerService managerService) {
+    private final ManagerService managerService;
+    private final ClubService clubService;
+
+    public ManagerController(ManagerService managerService, ClubService clubService) {
         this.managerService = managerService;
+        this.clubService = clubService;
     }
 
     @InitBinder
@@ -32,7 +38,7 @@ public class ManagerController {
         dataBinder.setDisallowedFields("id");
     }
 
-    @RequestMapping("/")
+    @RequestMapping({"", "/"})
     public String findAllManagers(Model model){
         Set<Manager> setAllManagers = managerService.findAll();
         List<Manager> allManagers = new ArrayList<>(setAllManagers);

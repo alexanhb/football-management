@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/premierLeagueStyle.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/premierLeagueJS.js}"></script>
+</head>
+<body>
+
+<header class="masterHeader">
+  <nav class="clubLogoNavigation"></nav>
+  <div class="fixedContainer">
+    <div class="navContainer">
+      <nav class="mainNav">
+        <a class="pageLinks" href="/index.html">Home</a>
+        <a class="pageLinks" href="/clubs/">Clubs</a>
+        <a class="pageLinks" href="/managers/">Managers</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<h2>Manager Information</h2>
+
+
+<div class="managerMainContent" th:object="${manager}">
+  <div class="managerNameAndClub">
+    <img class="managerImage" th:src="${manager.managerImg}" />
+    <h3 class="managerName" th:text="*{firstName + ' ' + lastName}"></h3>
+    <h3 class="managerBorn" th:text="*{birthDate}"></h3>
+    <!--<img class="managerClubLogo" th:src="${manager.club.clubLogo}" />
+    <h3 class="managerClubName" th:text="*{club.clubName}"></h3> -->
+  </div>
+</div>
+
+
+<!--<table th:object="${manager}">
+  <tr>
+    <th>Firstname: </th>
+    <td th:text="*{firstName}"></td>
+  </tr>
+  <tr>
+    <th>Lastname: </th>
+    <td th:text="*{lastName}"></td>
+  </tr>
+  <tr>
+    <th>Birthday: </th>
+    <td th:text="*{birthDate}"></td>
+  </tr>
+
+  <a class="managerClubLink" th:href="@{/clubs/__${manager.club.clubName}__}">
+    <tr>
+      <th>Club: </th>
+      <td th:text="*{club.clubName}"></td>
+    </tr>
+  </a>
+</table> -->
+</body>
+</html>
